@@ -1,0 +1,12 @@
+type Query {
+    sentiment(phrase: String!): SentimentAnalysis
+}
+
+type SentimentAnalysis {
+    score: Int
+    comparative: Float
+    tokens: [String]
+    words: [String]
+    positive: [String]
+    negative: [String]
+}
