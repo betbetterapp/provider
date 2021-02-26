@@ -1,12 +1,66 @@
 type Query {
-    sentiment(phrase: String!): SentimentAnalysis
+    fixtures(live: Boolean = false): [Fixture!]!
+    fixtureById(id: ID!): Fixture
 }
 
-type SentimentAnalysis {
-    score: Int
-    comparative: Float
-    tokens: [String]
-    words: [String]
-    positive: [String]
-    negative: [String]
+type Fixture {
+    id: ID!
+    timestamp: Float!
+    goals: FixtureGoals!
+    league: FixtureLeague!
+    teams: FixtureTeams!
+    status: FixtureStatus!
+    events: [FixtureEvent!]
+}
+
+type FixtureGoals {
+    home: Int
+    away: Int
+}
+
+type FixtureLeague {
+    id: ID!
+    name: String!
+    country: String!
+    logo: String!
+    season: Int!
+    round: String!
+}
+
+type FixtureTeams {
+    home: FixtureTeam!
+    away: FixtureTeam!
+    winner: FixtureTeam
+}
+
+type FixtureTeam {
+    id: ID!
+    name: String!
+    logo: String!
+}
+
+type FixtureStatus {
+    long: String!
+    short: String!
+    elapsed: Int
+}
+
+type FixtureEvent {
+    time: FixtureEventTime!
+    team: FixtureTeam!
+    player: FixtureEventPlayer!
+    assist: FixtureEventPlayer!
+    type: String!
+    detail: String!
+    comments: String
+}
+
+type FixtureEventTime {
+    elapsed: Int!
+    extra: Int
+}
+
+type FixtureEventPlayer {
+    id: ID!
+    name: String!
 }
