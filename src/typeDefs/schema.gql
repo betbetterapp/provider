@@ -6,6 +6,7 @@ type Query {
 type Fixture {
     id: ID!
     timestamp: Float!
+    referee: String
     goals: FixtureGoals!
     league: FixtureLeague!
     teams: FixtureTeams!
