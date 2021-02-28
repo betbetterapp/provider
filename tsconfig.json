@@ -11,6 +11,7 @@
         "sourceMap": false,
         "declaration": false,
         "listEmittedFiles": true,
+        "esModuleInterop": true,
         "incremental": true,
         "tsBuildInfoFile": "buildcache/tsbuildinfo.json",
         "allowSyntheticDefaultImports": true,
