@@ -15,6 +15,6 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 db.connect();
-server.listen(process.env.port || 4000).then(({ url }: { url: string }) => {
+server.listen(process.env.PORT || 4000).then(({ url }: { url: string }) => {
     console.log(`🚀 Server ready at ${url}`);
 });
