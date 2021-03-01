@@ -26,10 +26,6 @@ const httpServer = http.createServer(app);
 // app.use(...)
 app.use(bodyParser.json());
 
-app.get('/mysecret123312', (req, res) => {
-    res.send({ fbak: process.env.MONGO_URI });
-});
-
 server.applyMiddleware({ app });
 db.connect();
 httpServer.listen(process.env.PORT || 4000, () => {
