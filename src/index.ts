@@ -1,5 +1,9 @@
-import { ApolloServer } from 'apollo-server';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import bodyParser from 'body-parser';
 import { readFileSync } from 'fs';
+import http from 'http';
+
 import * as db from './database.js';
 
 import dotenv from 'dotenv';
@@ -16,8 +20,13 @@ const resolvers = {
     },
 };
 
+const app = express();
 const server = new ApolloServer({ typeDefs, resolvers });
+const httpServer = http.createServer(app);
+// app.use(...)
+app.use(bodyParser.json());
+server.applyMiddleware({ app });
 db.connect();
-server.listen(process.env.PORT || 4000).then(({ url }: { url: string }) => {
-    console.log(`🚀 Server ready at ${url}`);
+httpServer.listen(process.env.PORT || 4000, () => {
+    console.log(`🚀 Server ready at http://localhost:4000`);
 });
