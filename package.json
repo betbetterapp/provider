@@ -5,7 +5,9 @@
     "main": "build/index.js",
     "scripts": {
         "start": "tsc && node .",
-        "dev": "nodemon -e ts --exec \"npm run start\""
+        "dev": "nodemon -e ts --exec \"npm run start\"",
+        "compile": "tsc",
+        "zip": "bestzip provider.zip build/"
     },
     "keywords": [],
     "author": "",
