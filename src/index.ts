@@ -2,6 +2,9 @@ import { ApolloServer } from 'apollo-server';
 import { readFileSync } from 'fs';
 import * as db from './database.js';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { resolveFixtures, resolveFixtureById } from './resolvers/fixtures.js';
 
 const typeDefs = readFileSync('./src/typeDefs/schema.gql').toString('utf-8');
