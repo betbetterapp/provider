@@ -4,7 +4,7 @@
     "description": "",
     "main": "build/index.js",
     "scripts": {
-        "start": "node .",
+        "start": "env-cmd build/index.js",
         "dev": "nodemon -e ts --exec \"npm run compile-start\"",
         "compile-start": "tsc && node .",
         "compile": "tsc",
@@ -15,6 +15,7 @@
     "license": "ISC",
     "dependencies": {
         "apollo-server": "^2.21.0",
+        "env-cmd": "^10.1.0",
         "graphql": "^15.5.0",
         "mongoose": "^5.11.18"
     },
