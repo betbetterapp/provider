@@ -4,8 +4,9 @@
     "description": "",
     "main": "build/index.js",
     "scripts": {
-        "start": "tsc && node .",
-        "dev": "nodemon -e ts --exec \"npm run start\"",
+        "start": "node .",
+        "dev": "nodemon -e ts --exec \"npm run compile-start\"",
+        "compile-start": "tsc && node .",
         "compile": "tsc",
         "zip": "bestzip provider.zip build/"
     },
