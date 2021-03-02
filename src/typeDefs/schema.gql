@@ -10,6 +10,7 @@ type Fixture {
     goals: FixtureGoals!
     league: FixtureLeague!
     teams: FixtureTeams!
+    venue: FixtureVenue!
     status: FixtureStatus!
     events: [FixtureEvent!]
 }
@@ -38,6 +39,12 @@ type FixtureTeam {
     id: ID!
     name: String!
     logo: String!
+}
+
+type FixtureVenue {
+    id: ID!
+    name: String!
+    city: String!
 }
 
 type FixtureStatus {
