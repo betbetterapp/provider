@@ -23,6 +23,10 @@ const resolvers = {
 const app = express();
 const server = new ApolloServer({ typeDefs, resolvers });
 const httpServer = http.createServer(app);
+
+app.get('/', (req, res) => {
+    res.send({ available: true });
+});
 // app.use(...)
 app.use(bodyParser.json());
 

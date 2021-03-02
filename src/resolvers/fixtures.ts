@@ -19,7 +19,6 @@ export async function resolveFixtures(_: any, args: { live: boolean }) {
 export async function resolveFixtureById(_: any, args: { id: string; live: boolean }) {
     const id = parseInt(args.id);
     const live = args.live;
-    console.log(id);
     const fixture: Fixture | null = await getFixtureById(id, live);
     console.log('Fixture found!');
     if (fixture) {
