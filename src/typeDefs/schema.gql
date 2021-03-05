@@ -3,6 +3,10 @@ type Query {
     fixtureById(id: ID!, live: Boolean = false): Fixture
 }
 
+type Subscription {
+    fixtureUpdate: Fixture!
+}
+
 type Fixture {
     id: ID!
     timestamp: Float!
