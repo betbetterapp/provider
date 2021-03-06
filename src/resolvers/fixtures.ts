@@ -20,7 +20,7 @@ export async function resolveFixtureById(_: any, args: { id: string; live: boole
     }
 }
 
-function parseFixtures(fixtures: Fixture[]) {
+export function parseFixtures(fixtures: Fixture[]) {
     return fixtures.map((fixture) => {
         return {
             id: fixture.fixture.id,
