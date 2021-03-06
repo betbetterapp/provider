@@ -42,10 +42,14 @@ app.use(bodyParser.json());
 server.applyMiddleware({ app });
 db.connect().then(() => {
     const client = mongoose.connection.getClient();
-    const collection = client.db('betbetterDB').collection('fixtures');
-    const changeStream = collection.watch();
-    changeStream.on('change', (next) => {
-        console.log('Next:', next);
+    const fixtureChangeStream = client.db('betbetterDB').collection('fixtures').watch();
+    fixtureChangeStream.on('change', (next) => {
+        console.log('New or updated fixture:', next);
+    });
+
+    const liveFixtureChangeStream = client.db('betbetterDB').collection('live').watch();
+    liveFixtureChangeStream.on('change', (next) => {
+        console.log('New or updated live fixture:', next);
     });
 });
 
