@@ -3,7 +3,7 @@ import { LiveFixtureModel, FixtureModel } from './models/FixtureModel.js';
 import env from 'dotenv';
 env.config();
 
-export function connect() {
+function connect() {
     return mongoose
         .connect(process.env.MONGO_URI!!, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
         .then(() => {
@@ -30,4 +30,9 @@ async function getFixtureById(fixtureId: number, live: boolean) {
     else return LiveFixtureModel.findOne({ 'fixture.id': fixtureId });
 }
 
-export { getFixtures, getFixtureById };
+async function getFixtureByDocumentId(documentId: mongoose.ObjectId, live: boolean) {
+    if (!live) return FixtureModel.findOne({ _id: documentId });
+    else return LiveFixtureModel.findOne({ _id: documentId });
+}
+
+export { getFixtures, getFixtureById, getFixtureByDocumentId, connect };
