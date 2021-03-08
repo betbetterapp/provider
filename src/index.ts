@@ -3,8 +3,10 @@ import { execute, subscribe } from 'graphql';
 import { ApolloServer, PubSub, makeExecutableSchema } from 'apollo-server-express';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import { readFileSync } from 'fs';
 import http from 'http';
+import axios from 'axios';
 
 import mongoose from 'mongoose';
 import * as db from './database.js';
@@ -36,11 +38,28 @@ const resolvers = {
 };
 
 const app = express();
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+app.use(async function (req, res, next) {
+    console.log(req.cookies['connect.sid']);
+    const response = await axios.get('http://localhost:3535/validate', {
+        withCredentials: true,
+        headers: {
+            Cookie: `connect.sid=${req.cookies['connect.sid']}`,
+        },
+    });
+    const data = response.data;
+    console.log(response.data);
+    if (data.success) {
+        next();
+    } else {
+        res.send({ success: false, message: 'Authentication failed' });
+    }
+});
 app.get('/', (req, res) => {
     res.send({ available: true });
 });
-
-app.use(bodyParser.json());
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
