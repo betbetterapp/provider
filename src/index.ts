@@ -42,8 +42,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use(async function (req, res, next) {
-    console.log(req.cookies['connect.sid']);
-    const response = await axios.get('http://localhost:3535/validate', {
+    if (process.env.NODE_ENV === 'development') {
+        return next();
+    }
+    const response = await axios.get('http://localhost:5441/validate', {
         withCredentials: true,
         headers: {
             Cookie: `connect.sid=${req.cookies['connect.sid']}`,
